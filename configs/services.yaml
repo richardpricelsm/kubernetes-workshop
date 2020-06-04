@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: express-service
+  name: express-service
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app: express-app
+  type: NodePort
+status:
+  loadBalancer: {}

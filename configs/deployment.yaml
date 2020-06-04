@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: express-app
+  name: express-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: express-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: express-app
+    spec:
+      containers:
+        - image: richardpricelsm/express-app:latest
+          name: express-app
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: database
+                  key: MYSQL_PASSWORD
+status: {}
