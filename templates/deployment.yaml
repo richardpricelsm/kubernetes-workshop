@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: express-app
-  name: express-app
+    app: ${IMAGENAME}
+  name: ${IMAGENAME}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: express-app
+      app: ${IMAGENAME}
   template:
     metadata:
       labels:
-        app: express-app
+        app: ${IMAGENAME}
     spec:
       containers:
-        - image: richardpricelsm /express-app:5356f56
-          name: express-app
+        - image: ${DOCKERHUB}/${IMAGENAME}:${VERSION}
+          name: ${IMAGENAME}
           resources:
             requests:
               cpu: 100m
